@@ -3,9 +3,6 @@ var inquirer = require("inquirer");
 var dotenv = require('dotenv').config()
 var pw = process.env.raisins
 
-console.log("hey")
-console.log(pw)
-console.log("bye")
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -18,17 +15,18 @@ var connection = mysql.createConnection({
     user: "root",
   
     // Your password
-    password: "pw",
-    database: "top_songsDB"
+    password: pw,
+    database: "megacorp_DB"
   });
   
 // connect to the mysql server and sql database
 connection.connect(function(err) {
 if (err) throw err;
+console.log("connected!")
 // run the start function after the connection is made to prompt the user
 // promptUser();
 // searchArtist("Bing Crosby")
-searchTopArtists()
+// searchTopArtists()
 });
 
 // * A query which returns all data for songs sung by a specific artist
@@ -76,27 +74,27 @@ searchTopArtists()
 
 
 
-function searchArtist(artistName) {
-    // build query
-    var query = "SELECT artistName, position, songTitle, releaseYear FROM top5000 WHERE ?";
+// function searchArtist(artistName) {
+//     // build query
+//     var query = "SELECT artistName, position, songTitle, releaseYear FROM top5000 WHERE ?";
 
-    connection.query(query, [{ artistName: artistName }], function(err, res) {
-        if (err) throw err;
-        console.log(res);
-        connection.end();
-    })
-}
+//     connection.query(query, [{ artistName: artistName }], function(err, res) {
+//         if (err) throw err;
+//         console.log(res);
+//         connection.end();
+//     })
+// }
 
-// * A query which returns all artists who appear within the top 5000 more than once
-function searchTopArtists() {
-    var query = "SELECT artistName FROM top5000 WHERE "
+// // * A query which returns all artists who appear within the top 5000 more than once
+// function searchTopArtists() {
+//     var query = "SELECT artistName FROM top5000 WHERE "
 
-    connection.query(query, function(err, res) {
-        if (err) throw err;
-        console.log(res);
-        connection.end();
-    })
-}
+//     connection.query(query, function(err, res) {
+//         if (err) throw err;
+//         console.log(res);
+//         connection.end();
+//     })
+// }
 // GROUP BY raw_total ORDER BY COUNT(artistName) DESC
 // con.connect(function(err) {
 //     if (err) throw err;
@@ -116,23 +114,23 @@ function searchTopArtists() {
 
 
 
-  function promptUser() {
-      console.log("connected !" )
-      inquirer
-      .prompt[({
-          name: "action",
-          type: "list",
-          message: "which query would you like to run?",
-          choices: ["FIND SONGS BY ARTIST", "FIND MULT-HIT ARTISTS", "FIND SPECIFIC SONG"]
-      },{
+//   function promptUser() {
+//       console.log("connected !" )
+//       inquirer
+//       .prompt[({
+//           name: "action",
+//           type: "list",
+//           message: "which query would you like to run?",
+//           choices: ["FIND SONGS BY ARTIST", "FIND MULT-HIT ARTISTS", "FIND SPECIFIC SONG"]
+//       },{
 
-      })]
+//       })]
 
       // artist name
 
       // more than once
       // specific song data
-  }
+  
   
  
   
