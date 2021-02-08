@@ -41,7 +41,39 @@ function promptUser() {
         type: "list",
         message: "what would you like to do",
         choices: ["View All Roles", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Add Role", "Delete Roll"]
-    })
+    }).then(function(answer) {
+        switch(answer.action) {
+            case "View All Roles":
+                viewAllRoles();
+                break;
+            case "View All Employees by Department":
+                viewAllEmployeesByDepartment();
+                break;
+            case "View All Employees by Manager":  // x
+                viewAllEmployeesByManager();
+            case "Add Employee":
+                addEmployee();
+                break;
+            case "Remove Employe":  // x
+                removeEmployee();
+                break;
+            case "Update Employee Role":
+                updateEmployeeRole();
+                break;
+            case "Update Employee Manager": // x
+                updateEmployeeManager();
+                break;
+            case "View All Roles":
+                viewAllRoles();
+                break;
+            case "Add Role":
+                addRole();
+                break;
+            case "Delete Role": // x
+                deleteRole()
+                break;
+        }
+    });
 }
 
 // inquirer flow --> 
