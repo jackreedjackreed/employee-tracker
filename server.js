@@ -84,16 +84,19 @@ function viewAllRoles() {
     connection.query("SELECT * FROM roles", function  (err, res) {
         if (err) throw err;
         // console.log(res[1]);
-        console.table([
-            ['', 'col1', 'col2', 'col3'],
-            ['row1', 'aa', 'bbbbbb', 'ccc'],
-            ['row2', 'dddd', 'eeeeeeeee', 'fffff'],
-            ['row3', 'g', 'hhhh', 'iiiiii']
-          ]);
-        const exRole = res[1];
-        const exRole2 = res[2];
-        console.log(exRole.id, exRole.title, exRole.salary, exRole.department_id);
-        console.table([exRole, exRole2])
+        const resArray = []
+        for (let i = 0; i < res.length; i++) {
+            resArray.push(res[i]);
+            
+            // console.table(res[i])
+            // console.log(res[i].id, res[i].title, res[i].salary, res[i].department_id)
+        }
+        // console.log(resArray)
+        console.table(resArray);
+        // const exRole = res[1];
+        // const exRole2 = res[2];
+        // console.log(exRole.id, exRole.title, exRole.salary, exRole.department_id);
+        // console.table([exRole, exRole2])
     })
 };
     // 3 view all employees by dept
