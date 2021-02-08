@@ -79,6 +79,12 @@ function promptUser() {
 // inquirer flow --> 
 // 1 what would you like to do?
     // 2 view all roles
+function viewAllRoles() {
+    connection.query("SELECT * FROM roles", function  (err, res) {
+        if (err) throw err;
+        console.log(res);
+    })
+};
     // 3 view all employees by dept
     // 4 vew all employees by manager   x
     // 5 add employee 
