@@ -11,12 +11,12 @@ VALUES
 ("Tech Support", 70000, 1),
 ("Junior Developer", 65000, 1),
 ("Senior Developer", 120000, 1),
-("Procurment Manager", 150000, 2),
+("Procurement Manager", 150000, 2),
 ("Junior Buyer", 50000, 2),
 ("Senior Buyer", 68000, 2),
 ("Sales Manager", 175000, 3),
 ("Sales Support", 45000, 3),
-("Account Manager", 75000, 3),
+("Account Manager", 75000, 4),
 ("Sales Executive", 120000, 3);
 
 
@@ -26,7 +26,7 @@ VALUES
 ("Philip", "Huang", 5, 2),
 ("Berta", "Medina", 7, 6),
 ("Lino", "Hines", 7, 6),
-("Alton", "Griffith", 12, 9),
+("Alton", "Griffith", 8, 9),
 ("Les", "Villegas", 11, 9),
 ("Lillian", "Salazar", 10, 9),
 ("Katy", "Conner", 8, 6),

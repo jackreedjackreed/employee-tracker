@@ -80,13 +80,35 @@ function promptUser() {
     });
 }
 
+
+// var query = "SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist ";
+// query += "FROM top_albums INNER JOIN top5000 ON (top_albums.artist = top5000.artist AND top_albums.year ";
+// query += "= top5000.year) WHERE (top_albums.artist = ? AND top5000.artist = ?) ORDER BY top_albums.year, top_albums.position";
+
+
 // inquirer flow --> 
 // 1 what would you like to do?
     // 2 view all employees
+// function viewAllEmployees() {
+//     connection.query("SELECT * FROM employees LEFT JOIN roles", function  (err, res) {
+//         if (err) throw err;
+//         // console.log(res[1]);
+//         console.log(res);
+//         const resArray = []
+//         for (let i = 0; i < res.length; i++) {
+//             resArray.push(res[i]);
+//         }
+//         console.table(resArray);
+//         console.log("Action completed!");
+//         promptUser();
+//     });
+// };
+
 function viewAllEmployees() {
-    connection.query("SELECT * FROM employees", function  (err, res) {
-        if (err) throw err;
+    connection.query("SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id", function  (err, res) { // query help here from @NGDino
+        if (err) throw err;  
         // console.log(res[1]);
+        console.log(res);
         const resArray = []
         for (let i = 0; i < res.length; i++) {
             resArray.push(res[i]);
@@ -96,6 +118,7 @@ function viewAllEmployees() {
         promptUser();
     });
 };
+
 
     // 3 view all employees by dept
 function viewAllEmployeesByDepartment() {
@@ -107,6 +130,7 @@ function viewAllEmployeesByDepartment() {
     // 7 update employee role
     // 8 update employee manager        x
     // 9 view all roles
+
 function viewAllRoles() {
     connection.query("SELECT * FROM roles", function  (err, res) {
         if (err) throw err;
