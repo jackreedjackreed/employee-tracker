@@ -40,12 +40,12 @@ function promptUser() {
     // 1 what would you like to do?
         name: "action",
         type: "list",
-        message: "what would you like to do",
-        choices: ["View All Roles", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Add Role", "Delete Roll"]
+        message: "What would you like to do?",
+        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Add Role", "Delete Roll", "Finish"]
     }).then(function(answer) {
         switch(answer.action) {
-            case "View All Roles":
-                viewAllRoles();
+            case "View All Employees":
+                viewAllEmployees();
                 break;
             case "View All Employees by Department":
                 viewAllEmployeesByDepartment();
@@ -73,13 +73,40 @@ function promptUser() {
             case "Delete Role": // x
                 deleteRole()
                 break;
+            case "Finish":
+                connection.end()
+
         }
     });
 }
 
 // inquirer flow --> 
 // 1 what would you like to do?
-    // 2 view all roles
+    // 2 view all employees
+function viewAllEmployees() {
+    connection.query("SELECT * FROM employees", function  (err, res) {
+        if (err) throw err;
+        // console.log(res[1]);
+        const resArray = []
+        for (let i = 0; i < res.length; i++) {
+            resArray.push(res[i]);
+        }
+        console.table(resArray);
+        console.log("Action completed!");
+        promptUser();
+    });
+};
+
+    // 3 view all employees by dept
+function viewAllEmployeesByDepartment() {
+    console.log("hi")
+}
+    // 4 vew all employees by manager   x
+    // 5 add employee 
+    // 6 remove employee                x
+    // 7 update employee role
+    // 8 update employee manager        x
+    // 9 view all roles
 function viewAllRoles() {
     connection.query("SELECT * FROM roles", function  (err, res) {
         if (err) throw err;
@@ -87,46 +114,14 @@ function viewAllRoles() {
         const resArray = []
         for (let i = 0; i < res.length; i++) {
             resArray.push(res[i]);
-            
-            // console.table(res[i])
-            // console.log(res[i].id, res[i].title, res[i].salary, res[i].department_id)
         }
-        // console.log(resArray)
         console.table(resArray);
-        // const exRole = res[1];
-        // const exRole2 = res[2];
-        // console.log(exRole.id, exRole.title, exRole.salary, exRole.department_id);
-        // console.table([exRole, exRole2])
-    })
+        console.log("Action completed!")
+        promptUser();
+    });
 };
-    // 3 view all employees by dept
-    // 4 vew all employees by manager   x
-    // 5 add employee 
-    // 6 remove employee                x
-    // 7 update employee role
-    // 8 update employee manager        x
-    // 9 view all roles
     // 10 add role
     // 11 delete role                   x
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -177,74 +172,3 @@ function viewAllRoles() {
 // * A query which searches for a specific song in the top 5000 and returns the data for it
 
 
-
-//   function promptUser() {
-//       console.log("connected !" )
-//       inquirer
-//       .prompt[({
-//           name: "action",
-//           type: "list",
-//           message: "which query would you like to run?",
-//           choices: ["FIND SONGS BY ARTIST", "FIND MULT-HIT ARTISTS", "FIND SPECIFIC SONG"]
-//       },{
-
-//       })]
-
-      // artist name
-
-      // more than once
-      // specific song data
-  
-  
- 
-  
-
-
- // function which prompts the user for what action they should take
-//   function start() {
-//     inquirer
-//       .prompt({
-//         name: "postOrBid",
-//         type: "list",
-//         message: "Would you like to [POST] an auction or [BID] on an auction?",
-//         choices: ["POST", "BID", "EXIT"]
-//       })
-//       .then(function(answer) {
-//         // based on their answer, either call the bid or the post functions
-//         if (answer.postOrBid === "POST") {
-//           postAuction();
-//         }
-//         else if(answer.postOrBid === "BID") {
-//           bidAuction();
-//         } else{
-//           connection.end();
-//         }
-//       });
-//   }
-
-
-// /Build a command-line application that at a minimum allows the user to:
-
-// * Add departments, roles, employees
-
-                                                    // addDepartment(), addRole(), addEmployee()
-
-// * View departments, roles, employees
-
-                                                    // viewDepartment(), viewRoles(), viewEmployees()
-
-// * Update employee roles
-
-                                                    // updateEmployees()
-
-// Bonus points if you're able to:
-
-// * Update employee managers
-
-// * View employees by manager
-
-// * Delete departments, roles, and employees   
-
-                                                                //deleteDepartment(), deleteRole(), deleteEmployee()
-
-// * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
