@@ -1,3 +1,4 @@
+// require dependencies
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var dotenv = require('dotenv').config()

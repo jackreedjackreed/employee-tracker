@@ -1,15 +1,15 @@
-INSERT INTO department (name)
+INSERT INTO departments (name)
 VALUES
 ('IT'),                             -- seeds from user @NGDino on github
 ('Procurement'),
 ('Sales'),
 ('Acounting');
 
-INSERT INTO role (title, salary, department_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES
-("IT manager", 165000, 1),
+("IT Manager", 165000, 1),
 ("Tech Support", 70000, 1),
-("Junior developer", 65000, 1),
+("Junior Developer", 65000, 1),
 ("Senior Developer", 120000, 1),
 ("Procurment Manager", 150000, 2),
 ("Junior Buyer", 50000, 2),
@@ -34,4 +34,4 @@ VALUES
 ("Lemuel", "Pugh", 5, 2),
 ("Minh", "Mcknight", 4, 2),
 ("Rodrick", "Montgomery", 3, 2),
-("Vince", "Duke", 3, 2),
+("Vince", "Duke", 3, 2);
