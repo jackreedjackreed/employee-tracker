@@ -81,31 +81,27 @@ function promptUser() {
 }
 
 
-// var query = "SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist ";
-// query += "FROM top_albums INNER JOIN top5000 ON (top_albums.artist = top5000.artist AND top_albums.year ";
-// query += "= top5000.year) WHERE (top_albums.artist = ? AND top5000.artist = ?) ORDER BY top_albums.year, top_albums.position";
-
-
-// inquirer flow --> 
-// 1 what would you like to do?
-    // 2 view all employees
-// function viewAllEmployees() {
-//     connection.query("SELECT * FROM employees LEFT JOIN roles", function  (err, res) {
-//         if (err) throw err;
-//         // console.log(res[1]);
-//         console.log(res);
-//         const resArray = []
-//         for (let i = 0; i < res.length; i++) {
-//             resArray.push(res[i]);
-//         }
-//         console.table(resArray);
-//         console.log("Action completed!");
-//         promptUser();
-//     });
-// };
-
 function viewAllEmployees() {
-    connection.query("SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id", function  (err, res) { // query help here from @NGDino
+    var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
+
+    query += "LEFT JOIN roles ON employees.role_id = roles.id ";                 // JOIN HELP FROM: @NGDino
+    query += "LEFT JOIN departments ON roles.department_id = departments.id";
+
+    // Explanation
+
+    // employees_table <-- JOIN roles_table, with role_id FROM employees_table serving as the basis for the assortment of the Titles
+
+    // role_id <-- roles.id <-- Title of roles.id: x
+
+    // EXAMPLE --> employees table: "Philip", "Huang", role_id = "5", manager_id = "2"
+    // in roles_table --> role_id: 5 === "Procurement Manger", which has salary of 150000 and department_id of 2
+        // Procurement Manager pulls salary and department_id along with it
+
+    // in departments_table --> department_id: 2 === "Procurement"
+
+    // Finish with: ID, Philip, Huang, + role_id: 5 === "Procurement Manager", + Procurement Manager Salary, + department_id: 2 == "Procurement", manager_id: 
+
+    connection.query(query, function  (err, res) { 
         if (err) throw err;  
         // console.log(res[1]);
         console.log(res);
