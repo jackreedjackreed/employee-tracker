@@ -24,6 +24,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
 if (err) throw err;
 console.log("connected!")
+promptUser()
 // run the start function after the connection is made to prompt the user
 // promptUser();
 // searchArtist("Bing Crosby")
@@ -32,19 +33,29 @@ console.log("connected!")
 
 // * A query which returns all data for songs sung by a specific artist
 
+function promptUser() {
+    inquirer
+    .prompt({
+    // 1 what would you like to do?
+        name: "action",
+        type: "list",
+        message: "what would you like to do",
+        choices: ["View All Roles", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Add Role", "Delete Roll"]
+    })
+}
 
 // inquirer flow --> 
-// what would you like to do?
-    // view all roles
-    // view all employees by dept
-    // vew all employees by manager
-    // add employee
-    // remove employee
-    // update employee role
-    // update employee manager
-    // view all roles
-    // add role
-    // delete role
+// 1 what would you like to do?
+    // 2 view all roles
+    // 3 view all employees by dept
+    // 4 vew all employees by manager   x
+    // 5 add employee 
+    // 6 remove employee                x
+    // 7 update employee role
+    // 8 update employee manager        x
+    // 9 view all roles
+    // 10 add role
+    // 11 delete role                   x
 
 
 
