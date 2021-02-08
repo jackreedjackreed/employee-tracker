@@ -3,6 +3,7 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 var dotenv = require('dotenv').config()
 var pw = process.env.raisins
+var cTable = require("console-table");
 
 
 // create the connection information for the sql database
@@ -82,7 +83,17 @@ function promptUser() {
 function viewAllRoles() {
     connection.query("SELECT * FROM roles", function  (err, res) {
         if (err) throw err;
-        console.log(res);
+        // console.log(res[1]);
+        console.table([
+            ['', 'col1', 'col2', 'col3'],
+            ['row1', 'aa', 'bbbbbb', 'ccc'],
+            ['row2', 'dddd', 'eeeeeeeee', 'fffff'],
+            ['row3', 'g', 'hhhh', 'iiiiii']
+          ]);
+        const exRole = res[1];
+        const exRole2 = res[2];
+        console.log(exRole.id, exRole.title, exRole.salary, exRole.department_id);
+        console.table([exRole, exRole2])
     })
 };
     // 3 view all employees by dept
