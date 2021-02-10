@@ -83,19 +83,21 @@ function promptUser() {
 
 function viewAllEmployees() {
     var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
-
-    query += "LEFT JOIN roles ON employees.role_id = roles.id ";                 // JOIN HELP FROM: @NGDino
+                                                                         // JOIN HELP HERE FROM: @NGDino
+    query += "LEFT JOIN roles ON employees.role_id = roles.id ";        
     query += "LEFT JOIN departments ON roles.department_id = departments.id";
 
-    // Explanation
+    // My Explanation
 
-    // employees_table <-- JOIN roles_table, with role_id FROM employees_table serving as the basis for the assortment of the Titles
+    // employees_table <-- JOIN the roles_table, with role_id FROM employees_table serving as the basis for the assortment of the join so we can then add Titles
 
     // role_id <-- roles.id <-- Title of roles.id: x
 
     // EXAMPLE --> employees table: "Philip", "Huang", role_id = "5", manager_id = "2"
+
     // in roles_table --> role_id: 5 === "Procurement Manger", which has salary of 150000 and department_id of 2
-        // Procurement Manager pulls salary and department_id along with it
+    
+    // Procurement Manager pulls salary and department_id along with it
 
     // in departments_table --> department_id: 2 === "Procurement"
 
@@ -103,8 +105,6 @@ function viewAllEmployees() {
 
     connection.query(query, function  (err, res) { 
         if (err) throw err;  
-        // console.log(res[1]);
-        console.log(res);
         const resArray = []
         for (let i = 0; i < res.length; i++) {
             resArray.push(res[i]);
@@ -118,19 +118,38 @@ function viewAllEmployees() {
 
     // 3 view all employees by dept
 function viewAllEmployeesByDepartment() {
-    console.log("hi")
+    var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
+
+    query += "LEFT JOIN roles ON employees.role_id = roles.id ";              
+    query += "LEFT JOIN departments ON roles.department_id = departments.id";
+
+    connection.query(query, function  (err, res) { 
+        if (err) throw err;  
+        const resArray = []
+        for (let i = 0; i < res.length; i++) {
+            resArray.push(res[i]);
+        }
+        console.table(resArray);
+        console.log("Action completed!");
+        promptUser();
+    });
 }
     // 4 vew all employees by manager   x
     // 5 add employee 
     // 6 remove employee                x
     // 7 update employee role
     // 8 update employee manager        x
-    // 9 view all roles
 
+
+    // 9 view all roles
 function viewAllRoles() {
-    connection.query("SELECT * FROM roles", function  (err, res) {
+    var query = "SELECT roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department' FROM roles ";
+
+    // query += "LEFT JOIN roles ON employees.role_id = roles.id ";                
+    query += "LEFT JOIN departments ON roles.department_id = departments.id ";
+    query += "ORDER BY departments.id";
+    connection.query(query, function  (err, res) {
         if (err) throw err;
-        // console.log(res[1]);
         const resArray = []
         for (let i = 0; i < res.length; i++) {
             resArray.push(res[i]);
@@ -141,6 +160,14 @@ function viewAllRoles() {
     });
 };
     // 10 add role
+function addROle() {
+    inquirer
+    .prompt([
+        {
+        
+        }
+    ])
+}
     // 11 delete role                   x
 
 
