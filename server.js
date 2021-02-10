@@ -160,7 +160,7 @@ function viewAllRoles() {
     });
 };
     // 10 add role
-function addROle() {
+function addRole() {
     inquirer
     .prompt([
         {
@@ -175,13 +175,16 @@ function addROle() {
         name: "department",
         type: "list",
         message: "Which department?",
-        choices: ["IT", 'Procurement', 'Sales', 'Accounting']
+        choices: [{name: "IT", value: "1"}, {name: 'Procurement', value: "2"}, {name: 'Sales', value: '3'}, {name: 'Accounting', value: "4"}]
         }
     ]).then((res) => {
         // INSERT INTO roles (title, salary, department_id) VALUES ("IT Manager", 165000, 1)
+        // console.log(`INSERT INTO roles (${res.title}, ${res.salary}, ${res.department})`);
         connection.query(
-            `INSERT INTO roles ${res.title}, ${res.salary}, `
-        )
+            `INSERT INTO roles (title, salary, department_id) VALUES ("${res.title}", ${res.salary}, ${res.department})`
+        );
+    console.log("Role added!")
+    viewAllRoles();
     })
 }
     // 11 delete role                   x
