@@ -164,9 +164,25 @@ function addROle() {
     inquirer
     .prompt([
         {
-        
+        name: "title",
+        type: 'input',
+        message: "What's the title of this new role?",
+        }, {
+        name: "salary",
+        type: 'input',
+        message: "What's the salary?",
+        }, {
+        name: "department",
+        type: "list",
+        message: "Which department?",
+        choices: ["IT", 'Procurement', 'Sales', 'Accounting']
         }
-    ])
+    ]).then((res) => {
+        // INSERT INTO roles (title, salary, department_id) VALUES ("IT Manager", 165000, 1)
+        connection.query(
+            `INSERT INTO roles ${res.title}, ${res.salary}, `
+        )
+    })
 }
     // 11 delete role                   x
 
