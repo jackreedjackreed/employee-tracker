@@ -31,11 +31,10 @@ promptUser()
 function promptUser() {
     inquirer
     .prompt({
-    // 1 what would you like to do?
         name: "action",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "View All Roles", "Add Role", "Finish"]
+        choices: ["View All Employees", "Add Employee", "Remove Employee", "Update Employee Role", "View All Roles", "Add Role", "Finish"]
     }).then(function(answer) {
         switch(answer.action) {
             case "View All Employees":
