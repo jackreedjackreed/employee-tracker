@@ -116,7 +116,7 @@ function viewAllEmployees() {
 };
 
 
-    // 3 view all employees by dept
+// 2 view all employees by dept
 function viewAllEmployeesByDepartment() {
     var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
 
@@ -134,10 +134,9 @@ function viewAllEmployeesByDepartment() {
         promptUser();
     });
 }
-    // 4 vew all employees by manager   x
-    // 5 add employee 
+    // 3 vew all employees by manager   x
 
-    // INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("Philip", "Huang", 5, 2),
+// 4 add employee 
 function addEmployee() {
     inquirer
     .prompt([
@@ -172,7 +171,6 @@ function addEmployee() {
             message: "What's the number of their manager's ID?",
         }
     ]).then((res) => {
-        // INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("Philip", "Huang", 5, 2),
         connection.query(
             `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("${res.firstName}", "${res.lastName}", ${res.role}, ${res.managerID})`
         );
@@ -180,17 +178,51 @@ function addEmployee() {
     viewAllEmployees();
     });
 }
+    // 5 remove employee                x
 
-    // 6 remove employee                x
-    // 7 update employee role
-    // 8 update employee manager        x
+// 6 update employee role
+function updateEmployeeRole() {
+    console.log("So you'd like to update the role of an employee...")
+    inquirer
+    .prompt([{
+        name: "firstName",
+        type: "input",
+        message: "What's the employee's first name?"
+    },{
+        name: "lastName",
+        type: "input",
+        message: "What's their last name?"
+    }, {
+        name: "newRole",
+        type: "list",
+        message: "Please select their new role...",
+        choices: [
+            {name: "IT Manager", value: "1"},
+            {name: 'Tech Support', value: "2"},
+            {name: 'Junior Developer', value: '3'},
+            {name: 'Senior Developer', value: "4"},
+            {name: 'Procurement Manager', value: '5'},
+            {name: 'Junior Buyer', value: '6'},
+            {name: 'Senior Buyer', value: '7'},
+            {name: 'Sales Manager', value: '8'},
+            {name: 'Sales Support', value: '9'},
+            {name: 'Account Manager', value: '10'},
+            {name: 'Sales Executive', value: '11'} ]
+        }
+    ]).then((res) => {
+        connection.query(
+            `UPDATE employees SET role_id = ${res.newRole} WHERE first_name = "${res.firstName}" AND last_name = "${res.lastName}"`
+        );
+    console.log("Updating employee...")
+    viewAllEmployees();
+        });
+}
+    // 7 update employee manager        x
 
 
-    // 9 view all roles
+// 8 view all roles
 function viewAllRoles() {
-    var query = "SELECT roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department' FROM roles ";
-
-    // query += "LEFT JOIN roles ON employees.role_id = roles.id ";                
+    var query = "SELECT roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department' FROM roles ";               
     query += "LEFT JOIN departments ON roles.department_id = departments.id ";
     query += "ORDER BY departments.id";
     connection.query(query, function  (err, res) {
@@ -204,7 +236,8 @@ function viewAllRoles() {
         promptUser();
     });
 };
-    // 10 add role
+
+// 9 add role
 function addRole() {
     inquirer
     .prompt([
@@ -223,8 +256,6 @@ function addRole() {
         choices: [{name: "IT", value: "1"}, {name: 'Procurement', value: "2"}, {name: 'Sales', value: '3'}, {name: 'Accounting', value: "4"}]
         }
     ]).then((res) => {
-        // INSERT INTO roles (title, salary, department_id) VALUES ("IT Manager", 165000, 1)
-        // console.log(`INSERT INTO roles (${res.title}, ${res.salary}, ${res.department})`);
         connection.query(
             `INSERT INTO roles (title, salary, department_id) VALUES ("${res.title}", ${res.salary}, ${res.department})`
         );
@@ -232,7 +263,7 @@ function addRole() {
     viewAllRoles();
     })
 }
-    // 11 delete role                   x
+// 10 delete role                   x
 
 
 
