@@ -35,7 +35,7 @@ function promptUser() {
         name: "action",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "View All Roles", "Add Role", "Delete Roll", "Finish"]
+        choices: ["View All Employees", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "View All Roles", "Add Role", "Finish"]
     }).then(function(answer) {
         switch(answer.action) {
             case "View All Employees":
@@ -44,8 +44,8 @@ function promptUser() {
             case "View All Employees by Department":
                 viewAllEmployeesByDepartment();
                 break;
-            case "View All Employees by Manager":  // x
-                viewAllEmployeesByManager();
+            // case "View All Employees by Manager":  // x
+            //     viewAllEmployeesByManager();
             case "Add Employee":
                 addEmployee();
                 break;
@@ -55,8 +55,8 @@ function promptUser() {
             case "Update Employee Role":
                 updateEmployeeRole();
                 break;
-            case "Update Employee Manager": // x
-                updateEmployeeManager();
+            // case "Update Employee Manager": // x
+            //     updateEmployeeManager();
                 break;
             case "View All Roles":
                 viewAllRoles();
@@ -64,8 +64,8 @@ function promptUser() {
             case "Add Role":
                 addRole();
                 break;
-            case "Delete Role": // x
-                deleteRole()
+            // case "Delete Role": // x
+            //     deleteRole()
                 break;
             case "Finish":
                 connection.end()
@@ -74,7 +74,6 @@ function promptUser() {
     });
 }
 
-// 1 view all employees
 function viewAllEmployees() {
     var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
                                                                          // JOIN HELP HERE FROM: @NGDino
@@ -109,8 +108,6 @@ function viewAllEmployees() {
     });
 };
 
-
-// 2 view all employees by dept
 function viewAllEmployeesByDepartment() {
     var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
 
@@ -128,9 +125,7 @@ function viewAllEmployeesByDepartment() {
         promptUser();
     });
 }
-    // 3 vew all employees by manager   x
 
-// 4 add employee 
 function addEmployee() {
     inquirer
     .prompt([
@@ -172,7 +167,7 @@ function addEmployee() {
     viewAllEmployees();
     });
 }
-// 5 remove employee                x
+
 function removeEmployee() {
     console.log("So you'd like to remove an employee...")
     inquirer
@@ -194,7 +189,7 @@ function removeEmployee() {
         });
 }
 
-// 6 update employee role
+
 function updateEmployeeRole() {
     console.log("So you'd like to update the role of an employee...")
     inquirer
@@ -231,10 +226,7 @@ function updateEmployeeRole() {
     viewAllEmployees();
         });
 }
-    // 7 update employee manager        x
-
-
-// 8 view all roles
+ 
 function viewAllRoles() {
     var query = "SELECT roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department' FROM roles ";               
     query += "LEFT JOIN departments ON roles.department_id = departments.id ";
@@ -251,7 +243,6 @@ function viewAllRoles() {
     });
 };
 
-// 9 add role
 function addRole() {
     inquirer
     .prompt([
@@ -277,7 +268,7 @@ function addRole() {
     viewAllRoles();
     })
 }
-// 10 delete role                   x
+
 
 
 
