@@ -26,13 +26,7 @@ connection.connect(function(err) {
 if (err) throw err;
 console.log("connected!")
 promptUser()
-// run the start function after the connection is made to prompt the user
-// promptUser();
-// searchArtist("Bing Crosby")
-// searchTopArtists()
 });
-
-// * A query which returns all data for songs sung by a specific artist
 
 function promptUser() {
     inquirer
@@ -55,7 +49,7 @@ function promptUser() {
             case "Add Employee":
                 addEmployee();
                 break;
-            case "Remove Employe":  // x
+            case "Remove Employee":  // x
                 removeEmployee();
                 break;
             case "Update Employee Role":
@@ -178,7 +172,27 @@ function addEmployee() {
     viewAllEmployees();
     });
 }
-    // 5 remove employee                x
+// 5 remove employee                x
+function removeEmployee() {
+    console.log("So you'd like to remove an employee...")
+    inquirer
+    .prompt([{
+        name: "firstName",
+        type: "input",
+        message: "What's the employee's first name?"
+    },{
+        name: "lastName",
+        type: "input",
+        message: "What's their last name?"
+    }
+    ]).then((res) => {
+        connection.query(
+            `DELETE FROM employees WHERE first_name = "${res.firstName}" AND last_name = "${res.lastName}"`
+        );
+    console.log("Removing employee...")
+    viewAllEmployees();
+        });
+}
 
 // 6 update employee role
 function updateEmployeeRole() {
