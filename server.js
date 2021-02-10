@@ -80,7 +80,7 @@ function promptUser() {
     });
 }
 
-
+// 1 view all employees
 function viewAllEmployees() {
     var query = "SELECT employees.id as 'ID', employees.first_name as 'First Name', employees.last_name as 'Last Name', roles.title as 'Title', roles.salary as 'Salary', departments.name as 'Department', employees.manager_id as 'Manager ID' FROM employees ";
                                                                          // JOIN HELP HERE FROM: @NGDino
@@ -136,6 +136,51 @@ function viewAllEmployeesByDepartment() {
 }
     // 4 vew all employees by manager   x
     // 5 add employee 
+
+    // INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("Philip", "Huang", 5, 2),
+function addEmployee() {
+    inquirer
+    .prompt([
+        {
+        name: "firstName",
+        type: 'input',
+        message: "What's the employee's first name?",
+        }, {
+        name: "lastName",
+        type: 'input',
+        message: "What's their last name?",
+        }, {
+        name: "role",
+        type: "list",
+        message: "What's their role?",
+        choices: [
+            {name: "IT Manager", value: "1"},
+            {name: 'Tech Support', value: "2"},
+            {name: 'Junior Developer', value: '3'},
+            {name: 'Senior Developer', value: "4"},
+            {name: 'Procurement Manager', value: '5'},
+            {name: 'Junior Buyer', value: '6'},
+            {name: 'Senior Buyer', value: '7'},
+            {name: 'Sales Manager', value: '8'},
+            {name: 'Sales Support', value: '9'},
+            {name: 'Account Manager', value: '10'},
+            {name: 'Sales Executive', value: '11'}]
+        },
+        {
+            name: "managerID",
+            type: "input",
+            message: "What's the number of their manager's ID?",
+        }
+    ]).then((res) => {
+        // INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("Philip", "Huang", 5, 2),
+        connection.query(
+            `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("${res.firstName}", "${res.lastName}", ${res.role}, ${res.managerID})`
+        );
+    console.log("Role added!")
+    viewAllEmployees();
+    });
+}
+
     // 6 remove employee                x
     // 7 update employee role
     // 8 update employee manager        x
